@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Material Design</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string name="nav_item_home">Home</string>
+    <string name="nav_item_friends">Friends</string>
+    <string name="nav_item_notifications">Messages</string>
+
+    <string name="title_messages">Messages</string>
+    <string name="title_friends">Friends</string>
+    <string name="title_home">Home</string>
+
+    <!-- Login Screen-->
+    <string name="dont_have_an_account_text">Don\'t have an account yet?</string>
+    <string name="sign_up_text">&#160; Sign Up</string>
+    <string name="by_registering">By registering, I accept the &#160;</string>
+    <string name="terms_service">Terms of Service</string>
+    <string name="and">and the &#160;</string>
+    <string name="privacy_policy">Privacy Policy.</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="username_text">Username</string>
+    <string name="password_text">Password</string>
+    <string name="facebook_button_description">Login with Facebook button</string>
+    <string name="google_plus_description">Login with Google button</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Parent Sign Up-->
+    <string name="title_activity_parent_sign_up">Sign Up</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="parent_sign_up_heading">Parent</string>
+
+    <!-- Child Sign Up-->
+    <string name="child_sign_up_heading">Child</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="select_birth_date_button">Birth Date</string>
+    <string name="yes_text">Yes</string>
+    <string name="no_text">No</string>
+
+
+</resources>
