@@ -4,6 +4,8 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 class SignUpViewHolder {
 
@@ -40,16 +43,159 @@ class SignUpViewHolder {
  */
 public class ParentSignUpActivityFragment extends Fragment {
 
-    public static SignUpViewHolder signUpViewHolder;
+    public SignUpViewHolder signUpViewHolder;
     public static UserProfileDetails newUser = new UserProfileDetails();
 
-    public static String parentName;
-    public static String parentPhoneNumber;
-    public static String parentEmail;
-    public static String parentPassword;
-    public static String childName;
-    public static String childBirthDate;
-    public static String childGender;
+    public String parentName;
+    public String parentPhoneNumber;
+    public String parentEmail;
+    public String parentPassword;
+    public String childName;
+    public String childBirthDate;
+    public String childGender;
+
+    boolean parentNameEntered = false;
+    boolean parentPhoneNumberEntered = false;
+    boolean parentEmailEntered = false;
+    boolean parentPasswordEntered = false;
+    boolean childNameEntered = false;
+    boolean childBirthDateSelected = false;
+
+    public TextWatcher parentNameWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+            if(s.toString().contains(" ")){
+                parentNameEntered = true;
+            }
+            else {
+                signUpViewHolder.parentFullNameEditText.setError("Enter full name");
+                parentPasswordEntered = false;
+            }
+            checkCorrectDataEntered();
+        }
+    };
+    public TextWatcher parentPhoneNumberWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(s.toString().length() == 10){
+                parentPhoneNumberEntered = true;
+            }
+            else{
+                signUpViewHolder.parentPhoneNumberEditText.setError("Enter correct phone number");
+                parentPhoneNumberEntered = false;
+            }
+            checkCorrectDataEntered();
+        }
+    };
+    public TextWatcher parentEmailWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(s.toString().contains("@")){
+                parentEmailEntered = true;
+            }
+            else {
+                signUpViewHolder.parentEmailEditText.setError("Enter a correct email address");
+                parentEmailEntered = false;
+            }
+            checkCorrectDataEntered();
+        }
+    };
+    public TextWatcher parentPasswordWatcher =  new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(s.length() >= 5){
+                parentPasswordEntered = true;
+            }
+            else {
+                signUpViewHolder.parentPasswordEdiText.setError("Minimum length is 5");
+                parentPasswordEntered = false;
+            }
+            checkCorrectDataEntered();
+        }
+    };
+    public TextWatcher childNameWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(s.toString().contains(" ")){
+                childNameEntered = true;
+            }
+            else {
+                signUpViewHolder.childFullNameEditText.setError("Enter full name");
+                childNameEntered = false;
+            }
+            checkCorrectDataEntered();
+        }
+    };
+    public TextWatcher childBirthDateWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(!s.toString().matches(getResources().getString(R.string.select_birth_date_button))){
+                childBirthDateSelected = true;
+            }
+            checkCorrectDataEntered();
+        }
+    };
 
     public ParentSignUpActivityFragment() {
     }
@@ -58,8 +204,15 @@ public class ParentSignUpActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_parent_signup, container, false);
-
         signUpViewHolder = new SignUpViewHolder(view);
+
+        signUpViewHolder.parentFullNameEditText.addTextChangedListener(parentNameWatcher);
+        signUpViewHolder.parentPhoneNumberEditText.addTextChangedListener(parentPhoneNumberWatcher);
+        signUpViewHolder.parentEmailEditText.addTextChangedListener(parentEmailWatcher);
+        signUpViewHolder.parentPasswordEdiText.addTextChangedListener(parentPasswordWatcher);
+        signUpViewHolder.childFullNameEditText.addTextChangedListener(childNameWatcher);
+        signUpViewHolder.childBirthDateText.addTextChangedListener(childBirthDateWatcher);
+
         signUpViewHolder.childBirthDateText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +234,7 @@ public class ParentSignUpActivityFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -92,6 +246,8 @@ public class ParentSignUpActivityFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+
     }
 
     public void showDatePickerDialog(){
@@ -115,5 +271,17 @@ public class ParentSignUpActivityFragment extends Fragment {
         newUser.setParentPassword(parentPassword);
         newUser.setChildName(childName);
         newUser.setChildGender(childGender);
+    }
+
+    public void checkCorrectDataEntered(){
+        if(parentNameEntered && parentPhoneNumberEntered && parentEmailEntered &&
+                parentPasswordEntered && childNameEntered && childBirthDateSelected){
+            signUpViewHolder.nextButton.setTextColor(getResources().getColor(R.color.colorAccent));
+            signUpViewHolder.nextButton.setEnabled(true);
+        }
+        else {
+            signUpViewHolder.nextButton.setTextColor(getResources().getColor(R.color.textColorPrimary));
+            signUpViewHolder.nextButton.setEnabled(false);
+        }
     }
 }
