@@ -12,12 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import com.example.dhruv.projectkid.Helper.*;
+import com.example.dhruv.projectkid.ParentSignUpActivityFragment.*;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
-public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+public class SignUpBirthDatePickerFragment extends DialogFragment
+        implements DatePickerDialog.OnDateSetListener {
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Using current date as the default date
@@ -34,5 +37,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         TextView dateView = (TextView) getActivity().findViewById(R.id.birth_date_text_view);
         String formattedDate = Helper.getFormattedDateString(year, monthOfYear, dayOfMonth);
         dateView.setText(formattedDate);
+        ParentSignUpActivityFragment.newUser.setChildBirthDate(
+                new GregorianCalendar(year, monthOfYear, dayOfMonth)
+        );
     }
 }

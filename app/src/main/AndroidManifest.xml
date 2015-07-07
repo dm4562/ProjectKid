@@ -18,7 +18,16 @@
         </activity>
         <activity
             android:name=".ParentSignUpActivity"
-            android:label="@string/title_activity_parent_sign_up" >
+            android:label="@string/title_activity_parent_sign_up"
+            android:parentActivityName=".MainActivity">
+        </activity>
+        <activity
+            android:name=".ChildExtracurricularsActivity"
+            android:label="@string/title_activity_child_extracurriculars"
+            android:parentActivityName=".ParentSignUpActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.dhruv.projectkid.ParentSignUpActivity" />
         </activity>
     </application>
 

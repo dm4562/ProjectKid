@@ -42,6 +42,7 @@
     <string name="select_birth_date_button">Birth Date</string>
     <string name="yes_text">Yes</string>
     <string name="no_text">No</string>
+    <string name="title_activity_child_extracurriculars">ChildExtracurricularsActivity</string>
 
 
 </resources>

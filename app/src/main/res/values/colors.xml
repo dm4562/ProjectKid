@@ -9,4 +9,5 @@
     <color name="windowBackground">#000000</color>
     <color name="navigationBarColor">#000000</color>
     <color name="colorAccent">#FFEB3B</color>
+    <color name="greenPrimary">#4CAF50</color>
 </resources>
