@@ -17,4 +17,75 @@
         <item>@string/yes_text</item>
         <item>@string/no_text</item>
     </string-array>
+
+    <!-- String Array of all the activities to be inserted in the AllActivities Database-->
+    <string-array name="all_activities_for_database">
+        <item>@string/Drama_and_Theatre</item>
+        <item>@string/Third_Language</item>
+        <item>@string/Chess</item>
+        <item>@string/Computer_Programming</item>
+        <item>@string/Calligraphy</item>
+        <item>@string/Language_Classes</item>
+        <item>@string/Writing_Classes</item>
+        <item>@string/Reading_Classes</item>
+        <item>@string/Mental_Maths</item>
+        <item>@string/Science_and_Robotics</item>
+        <item>@string/Astronomy_Club</item>
+        <item>@string/Badminton</item>
+        <item>@string/Archery</item>
+        <item>@string/Basketball</item>
+        <item>@string/Swimming</item>
+        <item>@string/Tennis</item>
+        <item>@string/Martial_Arts</item>
+        <item>@string/Skating</item>
+        <item>@string/Cycling</item>
+        <item>@string/cricket</item>
+        <item>@string/Football</item>
+        <item>@string/Art_and_Craft</item>
+        <item>@string/Cold_cooking</item>
+        <item>@string/Indian_Classical_Dance</item>
+        <item>@string/Bollywood_Dance</item>
+        <item>@string/Guitar</item>
+        <item>@string/Piano</item>
+        <item>@string/Violin</item>
+        <item>@string/Singing</item>
+        <item>@string/Golf</item>
+        <item>@string/Speaking_Club</item>
+        <item>@string/Etiquettes_classes</item>
+    </string-array>
+
+    <integer-array name="all_ages_for_database">
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>8</item>
+        <item>5</item>
+        <item>3</item>
+        <item>4</item>
+        <item>6</item>
+        <item>4</item>
+        <item>8</item>
+        <item>6</item>
+        <item>6</item>
+        <item>7</item>
+        <item>6</item>
+        <item>5</item>
+        <item>4</item>
+        <item>5</item>
+        <item>7</item>
+        <item>5</item>
+        <item>6</item>
+        <item>4</item>
+        <item>4</item>
+        <item>4</item>
+        <item>8</item>
+        <item>5</item>
+        <item>7</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>7</item>
+        <item>4</item>
+        <item>5</item>
+    </integer-array>
 </resources>

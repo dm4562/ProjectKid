@@ -42,4 +42,31 @@ public class UserProfileDetails {
         childGender = gender;
     }
 
+    public String getParentName(){
+        return parentName;
+    }
+
+    public Long getParentPhoneNumber() {
+        return parentPhoneNumber;
+    }
+
+    public String getParentEmail() {
+        return parentEmail;
+    }
+
+    public String getParentPassword() {
+        return parentPassword;
+    }
+
+    public String getChildName() {
+        return childName;
+    }
+
+    public GregorianCalendar getChildBirthDate() {
+        return childBirthDate;
+    }
+
+    public String getChildGender() {
+        return childGender;
+    }
 }

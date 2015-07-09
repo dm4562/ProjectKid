@@ -1,18 +1,11 @@
 package com.example.dhruv.projectkid;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import com.example.dhruv.projectkid.ParentSignUpActivityFragment.*;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -35,7 +28,7 @@ public class SignUpBirthDatePickerFragment extends DialogFragment
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         TextView dateView = (TextView) getActivity().findViewById(R.id.birth_date_text_view);
-        String formattedDate = Helper.getFormattedDateString(year, monthOfYear, dayOfMonth);
+        String formattedDate = Utility.getFormattedDateString(year, monthOfYear, dayOfMonth);
         dateView.setText(formattedDate);
         ParentSignUpActivityFragment.newUser.setChildBirthDate(
                 new GregorianCalendar(year, monthOfYear, dayOfMonth)

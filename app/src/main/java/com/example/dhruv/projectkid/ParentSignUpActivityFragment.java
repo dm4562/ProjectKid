@@ -64,7 +64,7 @@ public class ParentSignUpActivityFragment extends Fragment {
     public TextWatcher parentNameWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            checkCorrectDataEntered();
         }
 
         @Override
@@ -74,21 +74,14 @@ public class ParentSignUpActivityFragment extends Fragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-
-            if(s.toString().contains(" ")){
-                parentNameEntered = true;
-            }
-            else {
-                signUpViewHolder.parentFullNameEditText.setError("Enter full name");
-                parentPasswordEntered = false;
-            }
+            parentNameEntered = true;
             checkCorrectDataEntered();
         }
     };
     public TextWatcher parentPhoneNumberWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            checkCorrectDataEntered();
         }
 
         @Override
@@ -111,7 +104,7 @@ public class ParentSignUpActivityFragment extends Fragment {
     public TextWatcher parentEmailWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            checkCorrectDataEntered();
         }
 
         @Override
@@ -134,7 +127,7 @@ public class ParentSignUpActivityFragment extends Fragment {
     public TextWatcher parentPasswordWatcher =  new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            checkCorrectDataEntered();
         }
 
         @Override
@@ -167,20 +160,13 @@ public class ParentSignUpActivityFragment extends Fragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-            if(s.toString().contains(" ")){
                 childNameEntered = true;
-            }
-            else {
-                signUpViewHolder.childFullNameEditText.setError("Enter full name");
-                childNameEntered = false;
-            }
-            checkCorrectDataEntered();
         }
     };
     public TextWatcher childBirthDateWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            checkCorrectDataEntered();
         }
 
         @Override
@@ -213,20 +199,15 @@ public class ParentSignUpActivityFragment extends Fragment {
         signUpViewHolder.childFullNameEditText.addTextChangedListener(childNameWatcher);
         signUpViewHolder.childBirthDateText.addTextChangedListener(childBirthDateWatcher);
 
-        signUpViewHolder.childBirthDateText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        signUpViewHolder.childBirthDateText.setOnClickListener((View v) -> {
                 showDatePickerDialog();
-            }
         });
-        signUpViewHolder.nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+        signUpViewHolder.nextButton.setOnClickListener((View v) -> {
                 setNewUserData();
                 Intent intent = new Intent(getActivity(),
                         ChildExtracurricularsActivity.class);
                 startActivity(intent);
-            }
         });
         return view;
     }

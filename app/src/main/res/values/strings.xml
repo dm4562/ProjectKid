@@ -43,6 +43,40 @@
     <string name="yes_text">Yes</string>
     <string name="no_text">No</string>
     <string name="title_activity_child_extracurriculars">ChildExtracurricularsActivity</string>
-
+    
+    <!--##################### AllActivities Database activities strings###########################-->
+    <string name="Drama_and_Theatre">Drama and Theatre</string>
+    <string name="Third_Language">Third Language</string>
+    <string name="Chess">Chess</string>
+    <string name="Computer_Programming">Computer Programming</string>
+    <string name="Calligraphy">Calligraphy</string>
+    <string name="Language_Classes">Language Classes</string>
+    <string name="Writing_Classes">Writing Classes</string>
+    <string name="Reading_Classes">Reading Classes</string>
+    <string name="Mental_Maths">Mental Maths</string>
+    <string name="Science_and_Robotics">Science and Robotics</string>
+    <string name="Astronomy_Club">Astronomy Club</string>
+    <string name="Badminton">Badminton</string>
+    <string name="Archery">Archery</string>
+    <string name="Basketball">Basketball</string>
+    <string name="Swimming">Swimming</string>
+    <string name="Tennis">Tennis</string>
+    <string name="Martial_Arts">Martial Arts</string>
+    <string name="Skating">Skating</string>
+    <string name="Cycling">Cycling</string>
+    <string name="cricket">Cricket</string>
+    <string name="Football">Football</string>
+    <string name="Art_and_Craft">Art and Craft</string>
+    <string name="Cold_cooking">Cold cooking</string>
+    <string name="Indian_Classical_Dance">Indian Classical Dance</string>
+    <string name="Bollywood_Dance">Bollywood Dance</string>
+    <string name="Guitar">Guitar</string>
+    <string name="Piano">Piano</string>
+    <string name="Violin">Violin</string>
+    <string name="Singing">Singing</string>
+    <string name="Golf">Golf</string>
+    <string name="Speaking_Club">Speaking Club</string>
+    <string name="Etiquettes_classes">Etiquettes classes</string>
+    <!-- #########################################################################################-->
 
 </resources>
