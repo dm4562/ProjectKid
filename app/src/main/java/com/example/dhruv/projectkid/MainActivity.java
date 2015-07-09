@@ -27,9 +27,12 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
         TextView signUpButton = (TextView) findViewById(R.id.sign_up_button);
-        signUpButton.setOnClickListener((View v) -> {
+        signUpButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ParentSignUpActivity.class);
                 startActivity(intent);
+            }
         });
     }
 

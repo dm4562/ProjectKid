@@ -2,6 +2,8 @@ package com.example.dhruv.projectkid;
 
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,6 +16,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.dhruv.projectkid.data.UserContract;
+import com.example.dhruv.projectkid.data.UserHelper;
 
 class SignUpViewHolder {
 
@@ -61,6 +66,9 @@ public class ParentSignUpActivityFragment extends Fragment {
     boolean childNameEntered = false;
     boolean childBirthDateSelected = false;
 
+    public UserHelper dbHelper;
+    public SQLiteDatabase database;
+
     public TextWatcher parentNameWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -91,11 +99,25 @@ public class ParentSignUpActivityFragment extends Fragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-            if(s.toString().length() == 10){
+            String text = s.toString();
+            if(text.length() == 10){
                 parentPhoneNumberEntered = true;
+                Cursor cursor = database.rawQuery("SELECT * FROM " +
+                        UserContract.UserProfileEntry.TABLE_NAME + " WHERE " +
+                        UserContract.UserProfileEntry.COLUMN_NAME_PARENT_PHONE + " = " + text, null);
+
+                if (cursor.getCount() <= 0) {
+                    parentPhoneNumberEntered = true;
+                }
+                else {
+                    signUpViewHolder.parentPhoneNumberEditText.setError(
+                            getResources().getString(R.string.phone_number_already_exists));
+                    parentPasswordEntered = false;
+                }
             }
             else{
-                signUpViewHolder.parentPhoneNumberEditText.setError("Enter correct phone number");
+                signUpViewHolder.parentPhoneNumberEditText.setError(
+                        getResources().getString(R.string.wrong_phone_number));
                 parentPhoneNumberEntered = false;
             }
             checkCorrectDataEntered();
@@ -118,7 +140,9 @@ public class ParentSignUpActivityFragment extends Fragment {
                 parentEmailEntered = true;
             }
             else {
-                signUpViewHolder.parentEmailEditText.setError("Enter a correct email address");
+                signUpViewHolder.parentEmailEditText.setError(
+                        getResources().getString(R.string.wrong_email)
+                );
                 parentEmailEntered = false;
             }
             checkCorrectDataEntered();
@@ -141,7 +165,9 @@ public class ParentSignUpActivityFragment extends Fragment {
                 parentPasswordEntered = true;
             }
             else {
-                signUpViewHolder.parentPasswordEdiText.setError("Minimum length is 5");
+                signUpViewHolder.parentPasswordEdiText.setError(
+                        getResources().getString(R.string.password_error)
+                );
                 parentPasswordEntered = false;
             }
             checkCorrectDataEntered();
@@ -192,6 +218,9 @@ public class ParentSignUpActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_parent_signup, container, false);
         signUpViewHolder = new SignUpViewHolder(view);
 
+        dbHelper = new UserHelper(getActivity());
+        database = dbHelper.getReadableDatabase();
+
         signUpViewHolder.parentFullNameEditText.addTextChangedListener(parentNameWatcher);
         signUpViewHolder.parentPhoneNumberEditText.addTextChangedListener(parentPhoneNumberWatcher);
         signUpViewHolder.parentEmailEditText.addTextChangedListener(parentEmailWatcher);
@@ -199,15 +228,21 @@ public class ParentSignUpActivityFragment extends Fragment {
         signUpViewHolder.childFullNameEditText.addTextChangedListener(childNameWatcher);
         signUpViewHolder.childBirthDateText.addTextChangedListener(childBirthDateWatcher);
 
-        signUpViewHolder.childBirthDateText.setOnClickListener((View v) -> {
+        signUpViewHolder.childBirthDateText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 showDatePickerDialog();
+            }
         });
 
-        signUpViewHolder.nextButton.setOnClickListener((View v) -> {
+        signUpViewHolder.nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 setNewUserData();
                 Intent intent = new Intent(getActivity(),
                         ChildExtracurricularsActivity.class);
                 startActivity(intent);
+            }
         });
         return view;
     }

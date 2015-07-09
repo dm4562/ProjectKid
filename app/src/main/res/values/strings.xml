@@ -34,6 +34,12 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="parent_sign_up_heading">Parent</string>
+    
+    <!-- Error Strings-->
+    <string name="phone_number_already_exists">This phone number already exist!</string>
+    <string name="wrong_phone_number">Enter 10 digit phone number</string>
+    <string name="wrong_email">Enter a correct email address</string>
+    <string name="password_error">Minimum length is 5</string>
 
     <!-- Child Sign Up-->
     <string name="child_sign_up_heading">Child</string>
