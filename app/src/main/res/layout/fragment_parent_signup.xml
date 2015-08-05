@@ -177,7 +177,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/layout_gender_birth_date_child"
+                android:id="@+id/layout_gender_child"
                 android:orientation="horizontal"
                 android:paddingBottom="8dp"
                 android:gravity="center_vertical"
@@ -198,25 +198,6 @@
 
 
             </LinearLayout>
-            <!--<LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_gender_birth_date_child"
-                android:id="@+id/layout_past_activities"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="16dp"
-                    android:paddingLeft="16dp"
-                    android:src="@drawable/ic_football_helmet_white_24dp"/>
-                <Spinner
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/yes_no_string_array"
-                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"/>
-            </LinearLayout>-->
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -240,26 +221,17 @@
                     android:clickable="true"
                     android:id="@+id/birth_date_text_view"
                     android:textSize="@dimen/abc_text_size_medium_material" />
-
             </LinearLayout>
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="52dp"
+                android:text="@string/next_text"
+                android:textSize="@dimen/abc_text_size_medium_material"
+                android:enabled="false"
+                android:elevation="8dp"
+                android:id="@+id/sign_up_page_next_button"
+                android:layout_below="@+id/layout_gender_child"
+                android:padding="@dimen/abc_button_padding_vertical_material"/>
         </RelativeLayout>
     </ScrollView>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:padding="8dp">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="NEXT"
-            android:enabled="false"
-            android:elevation="8dp"
-            android:id="@+id/sign_up_page_next_button"/>
-
-    </LinearLayout>
-
-
 </RelativeLayout>

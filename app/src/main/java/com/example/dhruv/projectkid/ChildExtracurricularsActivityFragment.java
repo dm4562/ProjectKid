@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckedTextView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +42,8 @@ public class ChildExtracurricularsActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_child_extracurriculars, container, false);
         activityListView = (ListView) view.findViewById(R.id.listView);
+        final LinearLayout activitiesListingContainer = (LinearLayout)
+                view.findViewById(R.id.activities_listing_container);
 
         LoadActivities loadActivities = new LoadActivities();
         loadActivities.execute("");
@@ -56,6 +60,17 @@ public class ChildExtracurricularsActivityFragment extends Fragment {
             }
         });
 
+        RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.activities_radio_container);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.activities_radio_yes) {
+                    activitiesListingContainer.setVisibility(View.VISIBLE);
+                } else {
+                    activitiesListingContainer.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
 
         return view;
     }

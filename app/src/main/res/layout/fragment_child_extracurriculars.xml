@@ -55,7 +55,7 @@
         android:layout_below="@+id/activities_radio_container"
         android:orientation="vertical"
         android:id="@+id/activities_listing_container"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"

@@ -22,23 +22,9 @@ import java.util.List;
 public class MainActivity extends FragmentActivity {
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        setContentView(R.layout.activity_main);
-
-        TextView signUpButton = (TextView) findViewById(R.id.sign_up_button);
-        signUpButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ParentSignUpActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         // Creating the Database if it doesn't exist and inserting the values into
         // AllActivitiesDatabase
@@ -46,7 +32,7 @@ public class MainActivity extends FragmentActivity {
             Toast.makeText(this, "Database exists!", Toast.LENGTH_LONG).show();
         }
         else {
-            Toast.makeText(this, "Database doesn't exist!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Database doesn't exist!", Toast.LENGTH_SHORT).show();
             UserHelper mDbHelper = new UserHelper(this);
             SQLiteDatabase mDatabase = mDbHelper.getWritableDatabase();
             List<String> allActivityNames = Arrays.asList(
@@ -70,6 +56,14 @@ public class MainActivity extends FragmentActivity {
             mDbHelper.close();
         }
 
+        TextView signUpButton = (TextView) findViewById(R.id.sign_up_button);
+        signUpButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ParentSignUpActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
