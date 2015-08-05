@@ -213,6 +213,12 @@ public class ParentSignUpActivityFragment extends Fragment {
     }
 
     @Override
+    public void onDetach() {
+        super.onDetach();
+        dbHelper.close();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_parent_signup, container, false);

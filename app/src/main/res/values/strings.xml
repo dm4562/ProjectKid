@@ -48,7 +48,12 @@
     <string name="select_birth_date_button">Birth Date</string>
     <string name="yes_text">Yes</string>
     <string name="no_text">No</string>
-    <string name="title_activity_child_extracurriculars">ChildExtracurricularsActivity</string>
+    <string name="title_activity_child_extracurriculars">Sign Up</string>
+    <string name="activities_header">Activity</string>
+    <string name="activities_question">Has your child done any activities before?</string>
+    <string name="radio_yes">Yes</string>
+    <string name="radio_no">No</string>
+    <string name="select_activities">Select all activities previous activities</string>
     
     <!--##################### AllActivities Database activities strings###########################-->
     <string name="Drama_and_Theatre">Drama and Theatre</string>
