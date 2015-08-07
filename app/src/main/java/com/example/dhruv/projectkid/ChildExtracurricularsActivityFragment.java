@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -44,6 +46,7 @@ public class ChildExtracurricularsActivityFragment extends Fragment {
         activityListView = (ListView) view.findViewById(R.id.listView);
         final LinearLayout activitiesListingContainer = (LinearLayout)
                 view.findViewById(R.id.activities_listing_container);
+        final Button nextButton = (Button) view.findViewById(R.id.activities_page_next_button);
 
         LoadActivities loadActivities = new LoadActivities();
         loadActivities.execute("");
@@ -51,12 +54,14 @@ public class ChildExtracurricularsActivityFragment extends Fragment {
         activityListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CheckedTextView checkedTextView =
-                        (CheckedTextView) view.findViewById(R.id.checked_text_view);
-                if (checkedTextView.isChecked())
-                    checkedTextView.setChecked(false);
-                else
-                    checkedTextView.setChecked(true);
+                CheckBox checkBox =
+                        (CheckBox) view.findViewById(R.id.checkBox_content);
+                if (checkBox.isChecked()) {
+                    checkBox.setChecked(false);
+
+                } else {
+                    checkBox.setChecked(true);
+                }
             }
         });
 
@@ -67,8 +72,10 @@ public class ChildExtracurricularsActivityFragment extends Fragment {
                 if (checkedId == R.id.activities_radio_yes) {
                     activitiesListingContainer.setVisibility(View.VISIBLE);
                 } else {
-                    activitiesListingContainer.setVisibility(View.INVISIBLE);
+                    activitiesListingContainer.setVisibility(View.GONE);
                 }
+                nextButton.setTextColor(getResources().getColor(R.color.colorAccent));
+                nextButton.setEnabled(true);
             }
         });
 
@@ -76,12 +83,11 @@ public class ChildExtracurricularsActivityFragment extends Fragment {
     }
 
 
-    class LoadActivities extends AsyncTask<String, Void, SimpleCursorAdapter> {
+    class LoadActivities extends AsyncTask<String, Void, MyCursorAdapter> {
 
         @Override
-        protected SimpleCursorAdapter doInBackground(String... params) {
+        protected MyCursorAdapter doInBackground(String... params) {
 
-           // SimpleCursorAdapter cursorAdapter;
             final String[] PROJECTION = {
                     AllActivitiesEntry._ID,
                     AllActivitiesEntry.COLUMN_NAME_ACTIVITY_NAME,
@@ -90,7 +96,6 @@ public class ChildExtracurricularsActivityFragment extends Fragment {
 
             final String SELECTION = null;
             String sortOrder = AllActivitiesEntry.COLUMN_NAME_ACTIVITY_NAME + " ASC";
-            String[] from_cols = {AllActivitiesEntry.COLUMN_NAME_ACTIVITY_NAME};
 
             UserHelper mUserHelper = new UserHelper(getActivity());
             SQLiteDatabase database = mUserHelper.getReadableDatabase();
@@ -104,21 +109,20 @@ public class ChildExtracurricularsActivityFragment extends Fragment {
                     sortOrder
             );
 
-            int[] to_cols = {R.id.checked_text_view};
-            cursorAdapter = new SimpleCursorAdapter(getActivity(),
+            MyCursorAdapter myCursorAdapter = new MyCursorAdapter(
+                    getActivity(),
                     R.layout.select_activity_simple_list_item,
                     cursor,
-                    from_cols,
-                    to_cols,
-                    0);
+                    0
+            );
 
-            return cursorAdapter;
+            return myCursorAdapter;
         }
 
         @Override
-        protected void onPostExecute(SimpleCursorAdapter simpleCursorAdapter) {
-            super.onPostExecute(simpleCursorAdapter);
-            activityListView.setAdapter(simpleCursorAdapter);
+        protected void onPostExecute(MyCursorAdapter myCursorAdapter) {
+            super.onPostExecute(myCursorAdapter);
+            activityListView.setAdapter(myCursorAdapter);
             activityListView.setItemsCanFocus(false);
         }
     }

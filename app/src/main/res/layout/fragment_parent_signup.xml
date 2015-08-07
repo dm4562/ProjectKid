@@ -219,19 +219,17 @@
                     android:textColor="@color/textColorPrimary"
                     android:paddingBottom="4dp"
                     android:clickable="true"
-                    android:id="@+id/birth_date_text_view"
-                    android:textSize="@dimen/abc_text_size_medium_material" />
+                    android:id="@+id/birth_date_text_view" />
             </LinearLayout>
             <Button
                 android:layout_width="fill_parent"
-                android:layout_height="52dp"
+                android:layout_height="wrap_content"
                 android:text="@string/next_text"
-                android:textSize="@dimen/abc_text_size_medium_material"
                 android:enabled="false"
                 android:elevation="8dp"
                 android:id="@+id/sign_up_page_next_button"
-                android:layout_below="@+id/layout_gender_child"
-                android:padding="@dimen/abc_button_padding_vertical_material"/>
+                android:layout_below="@id/layout_gender_child"/>
         </RelativeLayout>
     </ScrollView>
+
 </RelativeLayout>

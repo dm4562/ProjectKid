@@ -1,75 +1,90 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.dhruv.projectkid.ChildExtracurricularsActivityFragment"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/abc_text_size_headline_material"
-        android:layout_alignParentTop="true"
-        android:textColor="@color/colorAccent"
-        android:text="@string/activities_header"
-        android:paddingBottom="20dp"
-        android:id="@+id/activities_header"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/abc_text_size_medium_material"
-        android:layout_below="@+id/activities_header"
-        android:text="@string/activities_question"
-        android:id="@+id/activities_sign_up_question"
-        android:textColor="@color/textColorPrimary"/>
-
-    <RadioGroup
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/activities_radio_container"
-        android:layout_below="@+id/activities_sign_up_question"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp">
-
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/activities_radio_yes"
-            android:text="@string/radio_yes"
-            android:textSize="@dimen/abc_text_size_medium_material"
-            android:padding="4dp"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/activities_radio_no"
-            android:text="@string/radio_no"
-            android:textSize="@dimen/abc_text_size_medium_material"
-            android:padding="4dp"/>
-
-    </RadioGroup>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/activities_radio_container"
-        android:orientation="vertical"
-        android:id="@+id/activities_listing_container"
-        android:visibility="gone">
+        android:layout_height="fill_parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/textColorPrimary"
-            android:text="@string/select_activities"
-            android:textSize="@dimen/abc_text_size_medium_material"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"/>
-        <ListView
+            android:textSize="@dimen/abc_text_size_headline_material"
+            android:layout_alignParentTop="true"
+            android:textColor="@color/colorAccent"
+            android:text="@string/activities_header"
+            android:paddingBottom="20dp"
+            android:id="@+id/activities_header"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activities_header"
+            android:text="@string/activities_question"
+            android:id="@+id/activities_sign_up_question"
+            android:textColor="@color/textColorPrimary"/>
+
+        <RadioGroup
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listView"
-            android:choiceMode="multipleChoice"/>
+            android:id="@+id/activities_radio_container"
+            android:layout_below="@+id/activities_sign_up_question"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
 
-    </LinearLayout>
-</RelativeLayout>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/activities_radio_yes"
+                android:text="@string/radio_yes"
+                android:padding="4dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/activities_radio_no"
+                android:text="@string/radio_no"
+                android:padding="4dp"/>
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activities_radio_container"
+            android:orientation="vertical"
+            android:id="@+id/activities_listing_container"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColorPrimary"
+                android:text="@string/select_activities"
+                android:textSize="@dimen/abc_text_size_medium_material"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"/>
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="250dp"
+                android:id="@+id/listView"
+                android:choiceMode="multipleChoice"
+                android:focusable="false"/>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/next_text"
+            android:enabled="false"
+            android:elevation="8dp"
+            android:padding="8dp"
+            android:id="@+id/activities_page_next_button"/>
+    </RelativeLayout>
+
+</LinearLayout>
+

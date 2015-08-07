@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     android:paddingTop="8dp"
     android:paddingBottom="8dp">
 
-    <CheckedTextView
-        android:layout_width="fill_parent"
-        android:text="Hello"
-        android:id="@+id/checked_text_view"
-        android:layout_height="fill_parent"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:gravity="center_vertical"
-        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-        android:paddingLeft="6dip"
-        android:paddingRight="6dip"
-        android:checked="false"/>
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:focusable="false"/>
+</RelativeLayout>
