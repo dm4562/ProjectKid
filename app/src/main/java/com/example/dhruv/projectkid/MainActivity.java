@@ -2,6 +2,7 @@ package com.example.dhruv.projectkid;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -9,10 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dhruv.projectkid.data.*;
+import com.example.dhruv.projectkid.data.UserContract.*;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -31,11 +35,58 @@ public class MainActivity extends FragmentActivity {
         createAllActivitiesDb();
 
         TextView signUpButton = (TextView) findViewById(R.id.sign_up_button);
+        final EditText usernameEditText = (EditText) findViewById(R.id.username_field);
+        final EditText passwordEditText = (EditText) findViewById(R.id.password_field);
+        Button signInButton = (Button) findViewById(R.id.sign_in_button);
+
+        UserHelper userHelper = new UserHelper(this);
+        final SQLiteDatabase database = userHelper.getReadableDatabase();
+
         signUpButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ParentSignUpActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        signInButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = usernameEditText.getText().toString().trim();
+                String password = passwordEditText.getText().toString();
+
+                String[] PROJECTION = { UserProfileEntry.COLUMN_NAME_PARENT_EMAIL,
+                        UserProfileEntry.COLUMN_NAME_PARENT_PASSWORD };
+
+                Cursor cursor = database.query(UserContract.UserProfileEntry.TABLE_NAME,
+                        PROJECTION,
+                        UserProfileEntry.COLUMN_NAME_PARENT_EMAIL + " =?",
+                        new String[] { username },
+                        null,
+                        null,
+                        null);
+
+                if (cursor.getCount() <= 0) {
+                    Toast.makeText(getApplication(),
+                            getResources().getString(R.string.incorrect_email_id),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    cursor.moveToFirst();
+                    String emailDb = cursor.getString(cursor.getColumnIndexOrThrow(
+                            UserProfileEntry.COLUMN_NAME_PARENT_EMAIL));
+                    String passwordDb = cursor.getString(cursor.getColumnIndexOrThrow(
+                            UserProfileEntry.COLUMN_NAME_PARENT_PASSWORD));
+                    if (passwordDb.equals(password)) {
+                        Intent intent = new Intent(getApplicationContext(), DisplayActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(),
+                                getResources().getString(R.string.incorrect_password),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
     }

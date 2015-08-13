@@ -105,7 +105,8 @@
             android:id="@+id/username_field"
             android:hint="@string/username_text"
             android:imeOptions="actionNext"
-            android:singleLine="true"/>
+            android:singleLine="true"
+            android:inputType="textEmailAddress"/>
 
         <EditText
             android:layout_width="280dp"

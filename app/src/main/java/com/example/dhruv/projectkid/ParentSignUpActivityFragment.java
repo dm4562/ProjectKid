@@ -260,6 +260,7 @@ public class ParentSignUpActivityFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        database.close();
         dbHelper.close();
     }
 
@@ -307,11 +308,11 @@ public class ParentSignUpActivityFragment extends Fragment {
 
     public void setNewUserData(){
 
-        parentName = signUpViewHolder.parentFullNameEditText.getText().toString();
-        parentEmail = signUpViewHolder.parentEmailEditText.getText().toString();
-        parentPhoneNumber = signUpViewHolder.parentPhoneNumberEditText.getText().toString();
+        parentName = signUpViewHolder.parentFullNameEditText.getText().toString().trim();
+        parentEmail = signUpViewHolder.parentEmailEditText.getText().toString().trim();
+        parentPhoneNumber = signUpViewHolder.parentPhoneNumberEditText.getText().toString().trim();
         parentPassword = signUpViewHolder.parentPasswordEdiText.getText().toString();
-        childName = signUpViewHolder.childFullNameEditText.getText().toString();
+        childName = signUpViewHolder.childFullNameEditText.getText().toString().trim();
         childGender = signUpViewHolder.childGenderSpinner.getSelectedItem().toString();
         childBirthDate = signUpViewHolder.childBirthDateText.getText().toString();
 

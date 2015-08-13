@@ -21,7 +21,7 @@
     <string name="and">and the &#160;</string>
     <string name="privacy_policy">Privacy Policy.</string>
     <string name="sign_in">SIGN IN</string>
-    <string name="username_text">Username</string>
+    <string name="username_text">Email</string>
     <string name="password_text">Password</string>
     <string name="facebook_button_description">Login with Facebook button</string>
     <string name="google_plus_description">Login with Google button</string>
@@ -37,12 +37,14 @@
     <string name="parent_sign_up_heading">Parent</string>
     
     <!-- Error Strings-->
-    <string name="phone_number_already_exists">This phone number already exist!</string>
-    <string name="email_already_exist">This Email already exists!</string>
+    <string name="phone_number_already_exists">This phone number already exists!</string>
+    <string name="email_already_exist">This email already exists!</string>
     <string name="wrong_phone_number">Enter 10 digit phone number</string>
     <string name="wrong_email">Enter a correct email address</string>
     <string name="password_error">Minimum length is 5</string>
-    <string name="password_match_error">Passwords don\'t match!</string>
+    <string name="password_match_error">Passwords should match</string>
+    <string name="incorrect_email_id">Incorrect email</string>
+    <string name="incorrect_password">Incorrect password</string>
 
     <!-- Child Sign Up-->
     <string name="child_sign_up_heading">Child</string>

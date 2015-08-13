@@ -22,15 +22,6 @@ public class DisplayActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_display, container, false);
-
-        ListView listView = (ListView) view.findViewById(R.id.listView_temp);
-        ArrayList<String> completedActivities =
-                getActivity().getIntent().getStringArrayListExtra("completedActivities");
-
-        ArrayAdapter arrayAdapter =
-                new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, completedActivities);
-        listView.setAdapter(arrayAdapter);
-
         return view;
     }
 }
