@@ -64,11 +64,8 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void createAllActivitiesDb() {
-        if(UserHelper.checkDatabaseExists(getApplicationContext(), UserHelper.DATABASE_NAME)){
-//            Toast.makeText(this, "Database exists!", Toast.LENGTH_SHORT).show();
-        }
-        else {
-//            Toast.makeText(this, "Database doesn't exist!", Toast.LENGTH_SHORT).show();
+        if(!UserHelper.checkDatabaseExists(getApplicationContext(), UserHelper.DATABASE_NAME)){
+
             UserHelper mDbHelper = new UserHelper(this);
             SQLiteDatabase mDatabase = mDbHelper.getWritableDatabase();
             List<String> allActivityNames = Arrays.asList(

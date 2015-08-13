@@ -26,6 +26,7 @@ class SignUpViewHolder {
     public EditText parentPhoneNumberEditText;
     public EditText parentEmailEditText;
     public EditText parentPasswordEdiText;
+    public EditText parentPasswordRepeatEditText;
     public EditText childFullNameEditText;
     public TextView childBirthDateText;
     public Spinner childGenderSpinner;
@@ -36,6 +37,7 @@ class SignUpViewHolder {
         parentPhoneNumberEditText = (EditText) view.findViewById(R.id.parent_phone_number);
         parentEmailEditText = (EditText) view.findViewById(R.id.parent_email);
         parentPasswordEdiText = (EditText) view.findViewById(R.id.parent_password);
+        parentPasswordRepeatEditText = (EditText) view.findViewById(R.id.parent_password_confirm);
         childFullNameEditText = (EditText) view.findViewById(R.id.child_name);
         childBirthDateText = (TextView) view.findViewById(R.id.birth_date_text_view);
         childGenderSpinner = (Spinner) view.findViewById(R.id.child_spinner_gender);
@@ -63,6 +65,7 @@ public class ParentSignUpActivityFragment extends Fragment {
     boolean parentPhoneNumberEntered = false;
     boolean parentEmailEntered = false;
     boolean parentPasswordEntered = false;
+    boolean parentPasswordRepeatEntered = false;
     boolean childNameEntered = false;
     boolean childBirthDateSelected = false;
 
@@ -101,13 +104,13 @@ public class ParentSignUpActivityFragment extends Fragment {
         public void afterTextChanged(Editable s) {
             String text = s.toString();
             if(text.length() == 10){
-                parentPhoneNumberEntered = true;
                 Cursor cursor = database.rawQuery("SELECT * FROM " +
                         UserContract.UserProfileEntry.TABLE_NAME + " WHERE " +
                         UserContract.UserProfileEntry.COLUMN_NAME_PARENT_PHONE + " = " + text, null);
 
                 if (cursor.getCount() <= 0) {
                     parentPhoneNumberEntered = true;
+                    signUpViewHolder.parentPhoneNumberEditText.setError(null);
                 }
                 else {
                     signUpViewHolder.parentPhoneNumberEditText.setError(
@@ -137,7 +140,24 @@ public class ParentSignUpActivityFragment extends Fragment {
         @Override
         public void afterTextChanged(Editable s) {
             if(s.toString().contains("@")){
-                parentEmailEntered = true;
+                Cursor cursor = database.query(UserContract.UserProfileEntry.TABLE_NAME,
+                        new String[] {UserContract.UserProfileEntry.COLUMN_NAME_PARENT_EMAIL},
+                        UserContract.UserProfileEntry.COLUMN_NAME_PARENT_EMAIL + " =? ",
+                        new String[] { s.toString() },
+                        null,
+                        null,
+                        null
+                );
+
+                if (cursor.getCount() <= 0) {
+                    parentEmailEntered = true;
+                    signUpViewHolder.parentEmailEditText.setError(null);
+                } else {
+                    parentEmailEntered = false;
+                    signUpViewHolder.parentEmailEditText.setError(
+                            getResources().getString(R.string.email_already_exist));
+                }
+
             }
             else {
                 signUpViewHolder.parentEmailEditText.setError(
@@ -169,6 +189,31 @@ public class ParentSignUpActivityFragment extends Fragment {
                         getResources().getString(R.string.password_error)
                 );
                 parentPasswordEntered = false;
+            }
+            checkCorrectDataEntered();
+        }
+    };
+    public TextWatcher getParentPasswordRepeatWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            checkCorrectDataEntered();
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            String passwordAbove = signUpViewHolder.parentPasswordEdiText.getText().toString();
+            if (passwordAbove.equals(s.toString())) {
+                parentPasswordRepeatEntered = true;
+                signUpViewHolder.parentPasswordRepeatEditText.setError(null);
+            } else {
+                parentPasswordRepeatEntered = false;
+                signUpViewHolder.parentPasswordRepeatEditText.setError(
+                        getResources().getString(R.string.password_match_error));
             }
             checkCorrectDataEntered();
         }
@@ -231,6 +276,7 @@ public class ParentSignUpActivityFragment extends Fragment {
         signUpViewHolder.parentPhoneNumberEditText.addTextChangedListener(parentPhoneNumberWatcher);
         signUpViewHolder.parentEmailEditText.addTextChangedListener(parentEmailWatcher);
         signUpViewHolder.parentPasswordEdiText.addTextChangedListener(parentPasswordWatcher);
+        signUpViewHolder.parentPasswordRepeatEditText.addTextChangedListener(getParentPasswordRepeatWatcher);
         signUpViewHolder.childFullNameEditText.addTextChangedListener(childNameWatcher);
         signUpViewHolder.childBirthDateText.addTextChangedListener(childBirthDateWatcher);
 
@@ -279,7 +325,8 @@ public class ParentSignUpActivityFragment extends Fragment {
 
     public void checkCorrectDataEntered(){
         if(parentNameEntered && parentPhoneNumberEntered && parentEmailEntered &&
-                parentPasswordEntered && childNameEntered && childBirthDateSelected){
+                parentPasswordEntered && parentPasswordRepeatEntered &&
+                childNameEntered && childBirthDateSelected){
             signUpViewHolder.nextButton.setTextColor(getResources().getColor(R.color.colorAccent));
             signUpViewHolder.nextButton.setEnabled(true);
         }
