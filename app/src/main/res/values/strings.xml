@@ -55,6 +55,7 @@
     <string name="radio_no">No</string>
     <string name="select_activities">Select all previous activities</string>
     <string name="next_text">NEXT</string>
+    <string name="finish_text">FINISH</string>
     
     <!--##################### AllActivities Database activities strings###########################-->
     <string name="Drama_and_Theatre">Drama and Theatre</string>
