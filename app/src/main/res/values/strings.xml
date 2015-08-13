@@ -89,6 +89,7 @@
     <string name="Golf">Golf</string>
     <string name="Speaking_Club">Speaking Club</string>
     <string name="Etiquettes_classes">Etiquettes classes</string>
+    <string name="title_activity_display">DisplayActivity</string>
     <!-- #########################################################################################-->
 
 </resources>

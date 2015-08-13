@@ -1,5 +1,6 @@
 package com.example.dhruv.projectkid;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
@@ -13,6 +14,7 @@ public class UserProfileDetails {
     private static String childName;
     private static GregorianCalendar childBirthDate;
     private static String childGender;
+    private static ArrayList<String> completedActivities = new ArrayList<>();
 
     public void setChildBirthDate(GregorianCalendar calendar){
         childBirthDate = calendar;
@@ -42,6 +44,10 @@ public class UserProfileDetails {
         childGender = gender;
     }
 
+    public void setCompletedActivities (ArrayList<String> activities) {
+        completedActivities = activities;
+    }
+
     public String getParentName(){
         return parentName;
     }
@@ -68,5 +74,9 @@ public class UserProfileDetails {
 
     public String getChildGender() {
         return childGender;
+    }
+
+    public ArrayList<String> getCompletedActivities() {
+        return completedActivities;
     }
 }

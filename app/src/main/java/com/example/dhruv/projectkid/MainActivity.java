@@ -28,33 +28,7 @@ public class MainActivity extends FragmentActivity {
 
         // Creating the Database if it doesn't exist and inserting the values into
         // AllActivitiesDatabase
-        if(UserHelper.checkDatabaseExists(getApplicationContext(), UserHelper.DATABASE_NAME)){
-            Toast.makeText(this, "Database exists!", Toast.LENGTH_LONG).show();
-        }
-        else {
-            Toast.makeText(this, "Database doesn't exist!", Toast.LENGTH_SHORT).show();
-            UserHelper mDbHelper = new UserHelper(this);
-            SQLiteDatabase mDatabase = mDbHelper.getWritableDatabase();
-            List<String> allActivityNames = Arrays.asList(
-                    getResources().getStringArray(R.array.all_activities_for_database)
-            );
-
-            int[] allActivityAges = getResources().getIntArray(R.array.all_ages_for_database);
-
-            for (int i = 0; i < allActivityAges.length; i++) {
-                ContentValues values = new ContentValues();
-                values.put(UserContract.AllActivitiesEntry.COLUMN_NAME_ACTIVITY_NAME,
-                        allActivityNames.get(i));
-                values.put(UserContract.AllActivitiesEntry.COLUMN_NAME_MIN_AGE,
-                        allActivityAges[i]);
-
-                long newRowId = mDatabase.insert(UserContract.AllActivitiesEntry.TABLE_NAME,
-                        null, values);
-
-                values.clear();
-            }
-            mDbHelper.close();
-        }
+        createAllActivitiesDb();
 
         TextView signUpButton = (TextView) findViewById(R.id.sign_up_button);
         signUpButton.setOnClickListener(new OnClickListener() {
@@ -87,5 +61,36 @@ public class MainActivity extends FragmentActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void createAllActivitiesDb() {
+        if(UserHelper.checkDatabaseExists(getApplicationContext(), UserHelper.DATABASE_NAME)){
+//            Toast.makeText(this, "Database exists!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+//            Toast.makeText(this, "Database doesn't exist!", Toast.LENGTH_SHORT).show();
+            UserHelper mDbHelper = new UserHelper(this);
+            SQLiteDatabase mDatabase = mDbHelper.getWritableDatabase();
+            List<String> allActivityNames = Arrays.asList(
+                    getResources().getStringArray(R.array.all_activities_for_database)
+            );
+
+            int[] allActivityAges = getResources().getIntArray(R.array.all_ages_for_database);
+
+            for (int i = 0; i < allActivityAges.length; i++) {
+                ContentValues values = new ContentValues();
+                values.put(UserContract.AllActivitiesEntry.COLUMN_NAME_ACTIVITY_NAME,
+                        allActivityNames.get(i));
+                values.put(UserContract.AllActivitiesEntry.COLUMN_NAME_MIN_AGE,
+                        allActivityAges[i]);
+
+                long newRowId = mDatabase.insert(UserContract.AllActivitiesEntry.TABLE_NAME,
+                        null, values);
+
+                values.clear();
+            }
+            mDatabase.close();
+            mDbHelper.close();
+        }
     }
 }

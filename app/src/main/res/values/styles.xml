@@ -12,7 +12,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:textColorHint">@color/textColorHint</item>
-        <item name="android:textSize">@dimen/abc_text_size_medium_material</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>

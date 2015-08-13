@@ -248,28 +248,10 @@ public class ParentSignUpActivityFragment extends Fragment {
                 Intent intent = new Intent(getActivity(),
                         ChildExtracurricularsActivity.class);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
         return view;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-
     }
 
     public void showDatePickerDialog(){

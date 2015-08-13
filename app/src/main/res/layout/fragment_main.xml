@@ -17,7 +17,6 @@
         android:id="@+id/sign_in_button"
         android:text="@string/sign_in"
         android:textColor="@color/textColorPrimary"
-        android:textSize="@dimen/abc_text_size_medium_material"
         android:layout_centerHorizontal="true"
         android:background="@color/colorPrimary"/>
 

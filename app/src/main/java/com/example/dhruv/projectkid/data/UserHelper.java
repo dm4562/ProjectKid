@@ -53,16 +53,11 @@ public class UserHelper extends SQLiteOpenHelper {
                 UserActivitiesEntry.TABLE_NAME + " (" +
                 UserActivitiesEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 UserActivitiesEntry.COLUMN_NAME_USER_ID + " INTEGER NOT NULL, " +
-                UserActivitiesEntry.COLUMN_NAME_USER_ACTIVITY_ID + " INTEGER NOT NULL, " +
+                UserActivitiesEntry.COLUMN_NAME_USER_ACTIVITY_NAME + " TEXT NOT NULL, " +
 
                 //Setting up COLUMN_USER_ID as a foreign key to UserProfileTable
                 " FOREIGN KEY ( " + UserActivitiesEntry.COLUMN_NAME_USER_ID + " ) REFERENCES " +
-                UserProfileEntry.TABLE_NAME + " ( " + UserProfileEntry._ID + " ), " +
-
-                //Setting up COLUMN_USER_ACTIVITY_ID as a foreign key to AllActivitiesTable
-                " FOREIGN KEY ( " + UserActivitiesEntry.COLUMN_NAME_USER_ACTIVITY_ID +
-                " ) REFERENCES " + AllActivitiesEntry.TABLE_NAME +
-                " ( " + AllActivitiesEntry._ID + " ) );";
+                UserProfileEntry.TABLE_NAME + " ( " + UserProfileEntry._ID + " )" + ");";
 
         db.execSQL(SQL_CREATE_USER_PROFILE_TABLE);
         db.execSQL(SQL_CREATE_ALL_ACTIVITIES_TABLE);

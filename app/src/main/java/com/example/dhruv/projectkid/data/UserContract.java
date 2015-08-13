@@ -81,7 +81,7 @@ public class UserContract {
 
         public static final String TABLE_NAME = "user_activities";
         public static final String COLUMN_NAME_USER_ID = "_user_ID";
-        public static final String COLUMN_NAME_USER_ACTIVITY_ID = "_user_activities";
+        public static final String COLUMN_NAME_USER_ACTIVITY_NAME = "_user_activities";
     }
 
     public static final class AllActivitiesEntry implements BaseColumns {
