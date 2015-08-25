@@ -61,6 +61,10 @@
     <string name="select_activities">Select all previous activities</string>
     <string name="next_text">NEXT</string>
     <string name="finish_text">FINISH</string>
+
+    <!-- Display Activity-->
+    <string name="display_completed_activities_text">Display completed activities</string>
+    <string name="title_activity_display">User Profile</string>
     
     <!--##################### AllActivities Database activities strings###########################-->
     <string name="Drama_and_Theatre">Drama and Theatre</string>
@@ -94,8 +98,7 @@
     <string name="Singing">Singing</string>
     <string name="Golf">Golf</string>
     <string name="Speaking_Club">Speaking Club</string>
-    <string name="Etiquettes_classes">Etiquettes classes</string>
-    <string name="title_activity_display">DisplayActivity</string>
+    <string name="Etiquettes_classes">Etiquette classes</string>
     <!-- #########################################################################################-->
 
 </resources>

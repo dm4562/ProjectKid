@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
  */
 public class UserProfileDetails {
     private static String parentName;
-    private static Long parentPhoneNumber;
+    private static String parentPhoneNumber;
     private static String parentEmail;
     private static String parentPassword;
     private static String childName;
@@ -25,7 +25,7 @@ public class UserProfileDetails {
     }
 
     public void setParentPhoneNumber(String stringNumber){
-        parentPhoneNumber = Long.parseLong(stringNumber);
+        parentPhoneNumber = stringNumber;
     }
 
     public void setParentEmail(String email){
@@ -52,7 +52,7 @@ public class UserProfileDetails {
         return parentName;
     }
 
-    public Long getParentPhoneNumber() {
+    public String getParentPhoneNumber() {
         return parentPhoneNumber;
     }
 

@@ -19,28 +19,35 @@ import com.example.dhruv.projectkid.data.*;
 import com.example.dhruv.projectkid.data.UserContract.*;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 
 public class MainActivity extends FragmentActivity {
 
+    public static UserProfileDetails userProfileDetails = new UserProfileDetails();
+    UserHelper userHelper;
+    public SQLiteDatabase database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         // Creating the Database if it doesn't exist and inserting the values into
         // AllActivitiesDatabase
         createAllActivitiesDb();
+
+        userHelper = new UserHelper(this);
+        database = userHelper.getReadableDatabase();
 
         TextView signUpButton = (TextView) findViewById(R.id.sign_up_button);
         final EditText usernameEditText = (EditText) findViewById(R.id.username_field);
         final EditText passwordEditText = (EditText) findViewById(R.id.password_field);
         Button signInButton = (Button) findViewById(R.id.sign_in_button);
-
-        UserHelper userHelper = new UserHelper(this);
-        final SQLiteDatabase database = userHelper.getReadableDatabase();
 
         signUpButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -56,11 +63,11 @@ public class MainActivity extends FragmentActivity {
                 String username = usernameEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString();
 
-                String[] PROJECTION = { UserProfileEntry.COLUMN_NAME_PARENT_EMAIL,
-                        UserProfileEntry.COLUMN_NAME_PARENT_PASSWORD };
+//                String[] PROJECTION = { UserProfileEntry.COLUMN_NAME_PARENT_EMAIL,
+//                        UserProfileEntry.COLUMN_NAME_PARENT_PASSWORD };
 
                 Cursor cursor = database.query(UserContract.UserProfileEntry.TABLE_NAME,
-                        PROJECTION,
+                        null,
                         UserProfileEntry.COLUMN_NAME_PARENT_EMAIL + " =?",
                         new String[] { username },
                         null,
@@ -73,11 +80,11 @@ public class MainActivity extends FragmentActivity {
                             Toast.LENGTH_SHORT).show();
                 } else {
                     cursor.moveToFirst();
-                    String emailDb = cursor.getString(cursor.getColumnIndexOrThrow(
-                            UserProfileEntry.COLUMN_NAME_PARENT_EMAIL));
+
                     String passwordDb = cursor.getString(cursor.getColumnIndexOrThrow(
                             UserProfileEntry.COLUMN_NAME_PARENT_PASSWORD));
                     if (passwordDb.equals(password)) {
+                        createUserProfileDetails(cursor);
                         Intent intent = new Intent(getApplicationContext(), DisplayActivity.class);
                         startActivity(intent);
                         finish();
@@ -140,5 +147,49 @@ public class MainActivity extends FragmentActivity {
             mDatabase.close();
             mDbHelper.close();
         }
+    }
+
+    public void createUserProfileDetails (Cursor cursor) {
+        String email = cursor.getString(
+                cursor.getColumnIndexOrThrow(UserProfileEntry.COLUMN_NAME_PARENT_EMAIL));
+        String nameParent = cursor.getString(
+                cursor.getColumnIndexOrThrow(UserProfileEntry.COLUMN_NAME_PARENT_NAME));
+        String nameChild = cursor.getString(
+                cursor.getColumnIndexOrThrow(UserProfileEntry.COLUMN_NAME_CHILD_NAME));
+        long phone = cursor.getLong(
+                cursor.getColumnIndexOrThrow(UserProfileEntry.COLUMN_NAME_PARENT_PHONE));
+        String childGender = cursor.getString(
+                cursor.getColumnIndexOrThrow(UserProfileEntry.COLUMN_NAME_CHILD_GENDER));
+        int userId = cursor.getInt(cursor.getColumnIndexOrThrow(UserProfileEntry._ID));
+        String rawBirthDate = cursor.getString(
+                cursor.getColumnIndexOrThrow(UserProfileEntry.COLUMN_NAME_CHILD_DOB));
+        GregorianCalendar birthDate = Utility.getGregorianCalendarFromString(rawBirthDate);
+
+        Cursor activityCursor = database.query(UserActivitiesEntry.TABLE_NAME,
+                new String[]{UserActivitiesEntry.COLUMN_NAME_USER_ACTIVITY_NAME},
+                UserActivitiesEntry.COLUMN_NAME_USER_ID + " =? ",
+                new String[]{Integer.toString(userId)},
+                null,
+                null,
+                UserActivitiesEntry.COLUMN_NAME_USER_ACTIVITY_NAME + " ASC");
+
+        ArrayList<String> completedActivities = new ArrayList<>();
+        activityCursor.moveToFirst();
+        int count = 0;
+
+        do {
+            String activity = activityCursor.getString(activityCursor.getColumnIndexOrThrow(
+                    UserActivitiesEntry.COLUMN_NAME_USER_ACTIVITY_NAME));
+            completedActivities.add(count, activity);
+            count++;
+        }while (activityCursor.moveToNext());
+
+        userProfileDetails.setParentEmail(email);
+        userProfileDetails.setParentName(nameParent);
+        userProfileDetails.setChildName(nameChild);
+        userProfileDetails.setParentPhoneNumber(Long.toString(phone));
+        userProfileDetails.setChildGender(childGender);
+        userProfileDetails.setChildBirthDate(birthDate);
+        userProfileDetails.setCompletedActivities(completedActivities);
     }
 }
